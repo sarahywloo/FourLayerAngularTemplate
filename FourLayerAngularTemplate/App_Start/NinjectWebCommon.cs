@@ -12,6 +12,9 @@ namespace FourLayerAngularTemplate.App_Start
     using Ninject.Web.Common;
     using System.Data.Entity;
     using Infrastructure;
+    using Microsoft.AspNet.Identity;
+    using Domain;
+    using Microsoft.AspNet.Identity.EntityFramework;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -63,6 +66,7 @@ namespace FourLayerAngularTemplate.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>().InRequestScope();
+            kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
         }        
     }
 }
